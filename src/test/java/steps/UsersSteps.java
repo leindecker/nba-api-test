@@ -24,7 +24,6 @@ public class UsersSteps {
     public void iCreateANewUser() {
         Users validUser = UsersDataFactory.createValidUser();
         RequestManager.shared().setResponse(usersService.createUsers(validUser));
-        System.out.println(RequestManager.shared().getResponse().getBody().asString());
     }
 
     @Then("I validate the return of the data according to the contract {string}")
@@ -32,4 +31,38 @@ public class UsersSteps {
         RequestManager.shared().getResponse().then().body(matchesJsonSchemaInClasspath(ProjectSettings.API_CONTRACT_PATH + schemaPath));
     }
 
+    @When("I create a new user with email already taken")
+    public void iCreateANewUserWithEmailAlreadyTaken() {
+        RequestManager.shared().setResponse(usersService.getUsers());
+        String email = RequestManager.shared().getResponse().getBody().jsonPath().getString("email[0]");
+
+        Users user = UsersDataFactory.createValidUser();
+        user.setEmail(email);
+
+        RequestManager.shared().setResponse(usersService.createUsers(user));
+    }
+
+    @When("I create a new user with empty name")
+    public void iCreateANewUserWithEmptyName() {
+        Users userEmptyName = UsersDataFactory.createUserWithEmptyName();
+        RequestManager.shared().setResponse(usersService.createUsers(userEmptyName));
+    }
+
+    @When("I create a new user with empty email")
+    public void iCreateANewUserWithEmptyEmail() {
+        Users userEmptyEmail = UsersDataFactory.createUserWithEmptyEmail();
+        RequestManager.shared().setResponse(usersService.createUsers(userEmptyEmail));
+    }
+
+    @When("I create a new user with empty gender")
+    public void iCreateANewUserWithEmptyGender() {
+        Users userEmptyGender = UsersDataFactory.createUserWithEmptyGender();
+        RequestManager.shared().setResponse(usersService.createUsers(userEmptyGender));
+    }
+
+    @When("I create a new user with empty status")
+    public void iCreateANewUserWithEmptyStatus() {
+        Users userEmptyStatus = UsersDataFactory.createUserWithEmptyStatus();
+        RequestManager.shared().setResponse(usersService.createUsers(userEmptyStatus));
+    }
 }

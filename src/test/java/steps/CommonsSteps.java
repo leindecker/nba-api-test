@@ -2,6 +2,7 @@ package steps;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import util.PropertiesUtil;
 import util.RequestManager;
 
@@ -26,5 +27,11 @@ public class CommonsSteps {
     @Then("I check the status code {int}")
     public void iCheckTheStatusCode(Integer statusCode) {
         RequestManager.shared().getResponse().then().statusCode(statusCode);
+    }
+
+    @Then("I validate the message {string} in {string} field")
+    public void iValidateTheMessageInField(String message, String field) {
+        String responseField = RequestManager.shared().getResponse().jsonPath().getString(field);
+        Assert.assertEquals(message, responseField);
     }
 }

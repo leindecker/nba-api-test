@@ -23,4 +23,11 @@ public class BaseService {
                 .when()
                 .post(resource);
     }
+
+    public Response doGetRequest(String resource) {
+        return given()
+                .spec(RequestManager.shared().getRequest())
+                .when()
+                .get(resource);
+    }
 }

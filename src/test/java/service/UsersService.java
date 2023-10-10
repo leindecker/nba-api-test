@@ -20,4 +20,8 @@ public class UsersService extends BaseService{
     public Response createUsers(Users users) {
         return doPostRequest(USERS_RESOURCE, users);
     }
+
+    public Response getUsers() {
+        return doGetRequest(USERS_RESOURCE);
+    }
 }
