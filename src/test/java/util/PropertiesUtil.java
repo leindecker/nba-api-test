@@ -29,11 +29,15 @@ public class PropertiesUtil {
         }
     }
 
+//    public String getFileName() {
+//        if (RequestManager.shared().getProfile().equals("LOCAL")) {
+//            return LOCAL_PROPERTY_FILE_NAME;
+//        } else {
+//            return DEFAULT_PROPERTY_FILE_NAME;
+//        }
+//    }
+
     public String getFileName() {
-        if (RequestManager.shared().getProfile().equals("LOCAL")) {
-            return LOCAL_PROPERTY_FILE_NAME;
-        } else {
-            return DEFAULT_PROPERTY_FILE_NAME;
-        }
+        return LOCAL_PROPERTY_FILE_NAME;
     }
 }
