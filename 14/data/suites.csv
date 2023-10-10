@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 10 18:53:19 GMT 2023","Tue Oct 10 18:53:22 GMT 2023","2627","","Validate users resources","","Get all users","","Get all users",""
+"passed","Tue Oct 10 18:53:25 GMT 2023","Tue Oct 10 18:53:25 GMT 2023","822","","Validate users resources","","Get Invalid User","","Get Invalid User",""
+"passed","Tue Oct 10 18:53:22 GMT 2023","Tue Oct 10 18:53:25 GMT 2023","2497","","Validate users resources","","Get Specific User","","Get Specific User",""
