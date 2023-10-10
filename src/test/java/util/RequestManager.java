@@ -70,6 +70,8 @@ public class RequestManager {
         } else {
             this.profile = profile.trim().toUpperCase();
         }
+
+        System.out.println("PROFILE: " + profile);
     }
 
 }

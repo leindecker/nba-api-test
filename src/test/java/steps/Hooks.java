@@ -21,6 +21,8 @@ public class Hooks {
                 .filter(Predicate.not(String::isEmpty))
                 .orElse(DEFAULT_PROFILE);
 
+        System.out.println("SetUp: " + profile);
+
         RequestManager.shared().setProfile(profile);
 
         RestAssuredConfig config = RestAssured.config()
