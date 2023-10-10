@@ -43,3 +43,22 @@ Feature:  Validate users resources
     Then I validate the message "[status]" in "field" field
     And I validate the message "[can't be blank]" in "message" field
     And I check the status code 422
+
+  @getUser @getUsers
+  Scenario: Get all users
+    When I search for all the users
+    Then I validate the return of the data according to the contract "usersContract.json"
+    And I check the status code 200
+
+  @getUser
+  Scenario: Get Specific User
+    When I create a new user
+    And  I search for the user created
+    Then I validate the return of the data according to the contract "responseSpecificUserContract.json"
+    And I check the status code 200
+
+  @getUser @getInvalidUser
+  Scenario: Get Invalid User
+    When I search for invalid user
+    Then I validate the message "Resource not found" in "message" field
+    And I check the status code 404

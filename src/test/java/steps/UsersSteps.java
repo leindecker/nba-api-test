@@ -14,6 +14,8 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 public class UsersSteps {
 
+    private Long id;
+
     private final UsersService usersService;
 
     public UsersSteps() throws IOException {
@@ -65,4 +67,22 @@ public class UsersSteps {
         Users userEmptyStatus = UsersDataFactory.createUserWithEmptyStatus();
         RequestManager.shared().setResponse(usersService.createUsers(userEmptyStatus));
     }
+
+    @When("I search for all the users")
+    public void iSearchForAllTheUsers() {
+        RequestManager.shared().setResponse(usersService.getUsers());
+    }
+
+    @When("I search for the user created")
+    public void iSearchForTheUserCreated() {
+        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong("id");
+        RequestManager.shared().setResponse(usersService.getUser(id));
+    }
+
+    @When("I search for invalid user")
+    public void iSearchForInvalidUser() {
+        id = UsersDataFactory.invalidId();
+        RequestManager.shared().setResponse(usersService.getUser(id));
+    }
+
 }

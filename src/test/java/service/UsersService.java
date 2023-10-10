@@ -24,4 +24,8 @@ public class UsersService extends BaseService{
     public Response getUsers() {
         return doGetRequest(USERS_RESOURCE);
     }
+
+    public Response getUser(Long id) {
+        return doGetRequest(USERS_RESOURCE + "/" + id);
+    }
 }

@@ -49,4 +49,8 @@ public class UsersDataFactory {
         return userWithEmptyStatus;
     }
 
+    public static Long invalidId() {
+        return (long) faker.number().numberBetween(7000, 8499);
+    }
+
 }
