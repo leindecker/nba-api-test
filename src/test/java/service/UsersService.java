@@ -28,4 +28,8 @@ public class UsersService extends BaseService{
     public Response getUser(Long id) {
         return doGetRequest(USERS_RESOURCE + "/" + id);
     }
+
+    public Response updateUserDetails(Long id, Users users) {
+        return doPatchRequest(USERS_RESOURCE + "/" + id, users);
+    }
 }

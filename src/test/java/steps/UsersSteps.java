@@ -11,10 +11,14 @@ import util.RequestManager;
 import java.io.IOException;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 public class UsersSteps {
 
     private Long id;
+
+    private Users updatedUser;
 
     private final UsersService usersService;
 
@@ -83,6 +87,21 @@ public class UsersSteps {
     public void iSearchForInvalidUser() {
         id = UsersDataFactory.invalidId();
         RequestManager.shared().setResponse(usersService.getUser(id));
+    }
+
+    @When("I update user details")
+    public void iUpdateUserDetails() {
+        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong("id");
+        updatedUser = UsersDataFactory.createValidUser();
+        updatedUser.setId(id);
+        RequestManager.shared().setResponse(usersService.updateUserDetails(id, updatedUser));
+    }
+
+    @Then("I validate the user details updated")
+    public void iValidateTheUserDetailsUpdated() {
+        RequestManager.shared().setResponse(usersService.getUser(id));
+        Users responseBody = RequestManager.shared().getResponse().getBody().as(Users.class);
+        assertThat(updatedUser, samePropertyValuesAs(responseBody));
     }
 
 }
