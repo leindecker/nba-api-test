@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 10 18:26:28 GMT 2023","Tue Oct 10 18:26:31 GMT 2023","2621","","Validate users resources","","Create User with email already taken","","Create User with email already taken",""
+"passed","Tue Oct 10 18:26:31 GMT 2023","Tue Oct 10 18:26:32 GMT 2023","989","","Validate users resources","","Create User with empty Name","","Create User with empty Name",""
+"passed","Tue Oct 10 18:26:34 GMT 2023","Tue Oct 10 18:26:35 GMT 2023","937","","Validate users resources","","Create User with empty Status","","Create User with empty Status",""
+"passed","Tue Oct 10 18:26:33 GMT 2023","Tue Oct 10 18:26:34 GMT 2023","1010","","Validate users resources","","Create User with empty Gender","","Create User with empty Gender",""
+"passed","Tue Oct 10 18:26:25 GMT 2023","Tue Oct 10 18:26:28 GMT 2023","3423","","Validate users resources","","Create User","","Create User",""
+"passed","Tue Oct 10 18:26:32 GMT 2023","Tue Oct 10 18:26:33 GMT 2023","955","","Validate users resources","","Create User with empty Email","","Create User with empty Email",""
