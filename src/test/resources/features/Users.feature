@@ -62,3 +62,10 @@ Feature:  Validate users resources
     When I search for invalid user
     Then I validate the message "Resource not found" in "message" field
     And I check the status code 404
+
+  @updateUser
+  Scenario: Update user details
+    When I create a new user
+    And  I update user details
+    Then I check the status code 200
+    Then I validate the user details updated

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         glue = "steps",
         plugin = { "pretty", "json:target/cucumber-reports/CucumberJson.json"},
         monochrome = true,
-        tags = "@getUser",
+        tags = "@updateUser",
         snippets = CucumberOptions.SnippetType.CAMELCASE, dryRun = false)
 public class Runner {
 }

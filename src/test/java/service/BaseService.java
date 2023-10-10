@@ -30,4 +30,13 @@ public class BaseService {
                 .when()
                 .get(resource);
     }
+
+    public Response doPatchRequest(String resource, Object body) {
+        return given()
+                .spec(RequestManager.shared().getRequest())
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .patch(resource);
+    }
 }
