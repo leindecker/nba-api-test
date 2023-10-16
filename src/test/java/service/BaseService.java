@@ -20,7 +20,7 @@ public class BaseService {
                 .spec(RequestManager.shared().getRequest())
                 .contentType(ContentType.JSON)
                 .body(body)
-                .when()
+                .when().log().body()
                 .post(resource);
     }
 
