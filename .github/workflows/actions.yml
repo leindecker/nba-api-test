@@ -25,14 +25,14 @@ jobs:
         with:
          files: '["**/application-local.properties"]'
         env:
-          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+          AUTHENTICATION_BEARER_TOKEN: ${{ vars.AUTHENTICATION_BEARER_TOKEN }}
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
         shell: bash
 
       - name: Dump secret
-        run: echo -n "${{ secrets.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
+        run: echo -n "${{ vars.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
 
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
