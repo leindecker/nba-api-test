@@ -24,9 +24,11 @@ jobs:
       - name: Run Commands with a Secret
         env:
           SECRET_VALUE: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+          SECRET_VALUE01: ${{ secrets.BEARER_TOKEN }}
           JOB_VARIABLE: ${{ vars.CUCUMBER_TAG }}
         run: |
           echo "Hello World"
           echo "This is a secret value: $SECRET_VALUE"
           echo "This is a secret value: $JOB_VARIABLE"
+          echo "This is a secret value: SECRET_VALUE01"
 
