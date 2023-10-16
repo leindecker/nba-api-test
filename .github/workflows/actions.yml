@@ -32,6 +32,16 @@ jobs:
       #        run: mvn clean install
       #        continue-on-error: true
 
+
+      - name: Exec tests with Maven
+        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
+        continue-on-error: true
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+
+
       - name: Run Commands with a Secret
         env:
           SECRET_VALUE: ${{ secrets.BEARER_TOKEN }}
@@ -41,19 +51,16 @@ jobs:
           echo "This is a secret value: $SECRET_VALUE"
           echo "This is a secret value: $JOB_VARIABLE"
 
+      - name: Decode secrets.properties file
+        env:
+          SECRETS_PROPERTIES: ${{ secrets.BEARER_TOKE }}
+        run: echo "secrets.BEARER_TOKE" | base64 -d > ./application-local.properties
+
       - uses: cschleiden/replace-tokens@v1
         with:
-         files: '["**/*.properties"]'
-         env:
-         BEARER_TOKEN: $SECRET_VALUE
-
-      - name: Exec tests with Maven
-        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
-        continue-on-error: true
-
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
+          files: '["**/*.properties"]'
+          env:
+          BEARER_TOKEN: $SECRET_VALUE
         continue-on-error: true
         with:
           ref: gh-pages
