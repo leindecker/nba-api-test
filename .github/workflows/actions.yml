@@ -27,3 +27,7 @@ jobs:
           file_path: ./src/test/resources/config/application-local.properties
           property: VART
           value: gui
+
+      - name: Show updated file
+        run: cat $./src/test/resources/config/application-local.properties
+        shell: bash
