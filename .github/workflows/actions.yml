@@ -27,6 +27,6 @@ jobs:
         env:
           CALLBACK: some_value
 
-#      - name: Show updated file
-#        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
-#        shell: bash
+      - name: Show updated file
+        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
+        shell: bash
