@@ -21,9 +21,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Check out repository code
-        uses: cschleiden/replace-tokens@v1
+      - name: Write simple value to application.properties file
+        uses: GuillaumeFalourd/write-java-properties-file@v1
         with:
-          files: '["**/*.properties"]'
-          env:
-            VART: https://somecdn.com/...
+          file_path: ./src/test/resources/config/application-local.properties
+          property: VART
+          value: gui
