@@ -31,6 +31,12 @@ jobs:
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
         shell: bash
 
+      - shell: bash
+        env:
+          SUPER_SECRET: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+        run: |
+          example-command "$SUPER_SECRET"
+
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
