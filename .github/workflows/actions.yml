@@ -21,16 +21,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Read value from Properties-file
-        id: read_property
-        uses: christian-draeger/read-properties@1.1.1
+      - name: Read first property
+        id: read_first_property
+        uses: ./
         with:
-          path: '.src/test/resources/config/application-local.properties'
-          properties: 'the.key.of.a.property the.key.of.another.property'
-      - name: Do something with your bumped release version
-        run: echo ${{ steps.read_property.outputs.baseURI }}
-          # will print "the value of 'the.key.of.a.property'"
+          path: './test/resources/config/application-local.properties'
+          properties: 'baseURI'
+      - name: Do something with the property value
+        run: echo ${{ steps.read_first_property.outputs.baseURI }}
 
-      - name: Show updated file
-        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
-        shell: bash
+#      - name: Show updated file
+#        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
+#        shell: bash
