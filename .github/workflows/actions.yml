@@ -62,9 +62,6 @@ jobs:
           env:
           BEARER_TOKEN: $SECRET_VALUE
         continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
