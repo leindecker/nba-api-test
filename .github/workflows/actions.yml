@@ -32,13 +32,10 @@ jobs:
           echo "This is a secret value: $JOB_VARIABLE"
           echo "This is a secret value: $SECRET_VALUE01"
 
-      - name: Adding secret
-        run: |
-          echo $DEV_PROP_FILE >> src/test/resources/config/application-local.properties
-          src/test/resources/config/application-local.properties
-            shell: bash
-            env:
-            DEV_PROP_FILE: ${{secrets.AUTHENTICATION_BEARER_TOKEN}}
+      - name: Decode secrets.properties file
+        env:
+          SECRETS_PROPERTIES: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+        run: echo "$SECRETS_PROPERTIES" | base64 -d > ./application-local.properties
 
       - name: Read file contents
         id: read_file
