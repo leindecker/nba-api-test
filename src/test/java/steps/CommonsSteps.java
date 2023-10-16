@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class CommonsSteps {
 
-    private static final String AUTH_BEARER_TOKEN = "authentication.bearer_token";
+    private static final String AUTH_BEARER_TOKEN = "authentication.bearer.token";
 
     private final PropertiesUtil propertiesUtil;
 
