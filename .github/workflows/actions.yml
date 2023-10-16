@@ -21,14 +21,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Read first property
-        id: read_first_property
-        uses: ./
+      - uses: cschleiden/replace-tokens@v1
         with:
-          path: './test/resources/config/application-local.properties'
-          properties: 'baseURI'
-      - name: Do something with the property value
-        run: echo ${{ steps.read_first_property.outputs.baseURI }}
+         files: '["**/*.properties"]'
+        env:
+          CALLBACK: some_value
 
 #      - name: Show updated file
 #        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
