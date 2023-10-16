@@ -23,9 +23,9 @@ jobs:
 
       - uses: cschleiden/replace-tokens@v1
         with:
-         files: '["**/*.properties"]'
+         files: '["**/application-local.properties"]'
         env:
-          CALLBACK: some_value
+          CALLBACK: "${CUCUMBER_TAG}"
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
