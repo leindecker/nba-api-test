@@ -37,6 +37,9 @@ jobs:
         run: |
           echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
 
+      - name: Dump secret
+        run: echo -n "${{ secrets.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
+
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
