@@ -21,13 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
+      - name: Check out repository code
+        uses: cschleiden/replace-tokens@v1
         with:
-            envkey_DEBUG: false
-            envkey_SOME_API_KEY: "123456abcdef"
-            envkey_SECRET_KEY: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
-            file_name: .env
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: '["**/*.properties"]'
+          env:
+            VART: "GUI"
 
 #      - name: Run Commands with a Secret
 #        env:
