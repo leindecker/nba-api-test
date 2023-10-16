@@ -25,17 +25,11 @@ jobs:
         with:
          files: '["**/application-local.properties"]'
         env:
-          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }} | xxd -ps
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
         shell: bash
-
-      - name: Set up secret file
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
-        run: |
-          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
 
       - name: Dump secret
         run: echo -n "${{ secrets.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
