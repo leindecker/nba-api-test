@@ -29,5 +29,5 @@ jobs:
           value: gui
 
       - name: Show updated file
-        run: cat $./src/test/resources/config/application-local.properties
+        run: cat ${{github.workspace}}/test/resources/config/application-local.properties
         shell: bash
