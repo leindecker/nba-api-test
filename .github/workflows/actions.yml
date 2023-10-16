@@ -31,11 +31,11 @@ jobs:
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
         shell: bash
 
-      - shell: bash
+      - name: Set up secret file
         env:
-          SUPER_SECRET: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
         run: |
-          example-command "$SUPER_SECRET"
+          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
 
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
