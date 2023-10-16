@@ -21,11 +21,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - uses: cschleiden/replace-tokens@v1
-        with:
-         files: '["**/application-local.properties"]'
-        env:
-          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+#      - uses: cschleiden/replace-tokens@v1
+#        with:
+#         files: '["**/application-local.properties"]'
+#        env:
+#          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
