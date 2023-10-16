@@ -31,6 +31,7 @@ public class PropertiesUtil {
     }
 
     public String getPropertyByNameBase64(String property) {
+        System.out.println("String propert: " + property);
         String propertyName = properties.getProperty(property);
 
         System.out.println("propertyName: " + propertyName);
