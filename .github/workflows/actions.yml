@@ -34,8 +34,11 @@ jobs:
 
       - name: Adding secret
         run: |
-          printf ${{secrets.AUTHENTICATION_BEARER_TOKEN}} >> src/test/resources/config/application-local.properties
-        shell: bash
+          echo $DEV_PROP_FILE >> src/test/resources/config/application-local.properties
+          src/test/resources/config/application-local.properties
+            shell: bash
+            env:
+            DEV_PROP_FILE: ${{secrets.AUTHENTICATION_BEARER_TOKEN}}
 
       - name: Read file contents
         id: read_file
