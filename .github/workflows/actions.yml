@@ -21,25 +21,33 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Run Commands with a Secret
-        env:
-          SECRET_VALUE: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
-          SECRET_VALUE01: ${{ secrets.BEARER_TOKEN }}
-          JOB_VARIABLE: ${{ vars.CUCUMBER_TAG }}
-        run: |
-          echo "Hello World"
-          echo "This is a secret value: $SECRET_VALUE"
-          echo "This is a secret value: $JOB_VARIABLE"
-          echo "This is a secret value: $SECRET_VALUE01"
-
-      - name: Decode secrets.properties file
-        env:
-          SECRETS_PROPERTIES: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
-        run: echo "$SECRETS_PROPERTIES" | base64 -d > ./application-local.properties
-
-      - name: Read file contents
-        id: read_file
-        uses: andstor/file-reader-action@v1
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
         with:
-          path: "src/test/resources/config/application-local.properties"
+            envkey_DEBUG: false
+            envkey_SOME_API_KEY: "123456abcdef"
+            envkey_SECRET_KEY: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+            file_name: .env
+
+#      - name: Run Commands with a Secret
+#        env:
+#          SECRET_VALUE: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+#          SECRET_VALUE01: ${{ secrets.BEARER_TOKEN }}
+#          JOB_VARIABLE: ${{ vars.CUCUMBER_TAG }}
+#        run: |
+#          echo "Hello World"
+#          echo "This is a secret value: $SECRET_VALUE"
+#          echo "This is a secret value: $JOB_VARIABLE"
+#          echo "This is a secret value: $SECRET_VALUE01"
+#
+#      - name: Decode secrets.properties file
+#        env:
+#          SECRETS_PROPERTIES: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+#        run: echo "$SECRETS_PROPERTIES" | base64 -d > ./application-local.properties
+#
+#      - name: Read file contents
+#        id: read_file
+#        uses: andstor/file-reader-action@v1
+#        with:
+#          path: "src/test/resources/config/application-local.properties"
 
