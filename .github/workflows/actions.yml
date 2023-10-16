@@ -21,14 +21,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Write value to Properties-file
-        uses: christian-draeger/write-properties@1.1.0
-        with:
-          path: './src/test/resources/config/application-local.properties'
-          property: |
-            'VART'
-          value: |
-            'first value'
+      - name: Decode secrets.properties file
+        env:
+          SECRETS_PROPERTIES: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+        run: echo "$SECRETS_PROPERTIES" | base64 -d > ./application-local.properties
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
