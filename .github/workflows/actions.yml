@@ -37,3 +37,12 @@ jobs:
           printf ${{secrets.AUTHENTICATION_BEARER_TOKEN}} >> src/test/resources/config/application-local.properties
         shell: bash
 
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "src/test/resources/config/application-local.properties"
+
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
+
