@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Oct 17 18:39:00 GMT 2023","Tue Oct 17 18:39:05 GMT 2023","5494","","Validate users resources","","Update user details","","Update user details",""
+"broken","Tue Oct 17 18:42:28 GMT 2023","Tue Oct 17 18:42:32 GMT 2023","3544","","Validate users resources","","Update user details","","Update user details",""
