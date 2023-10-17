@@ -17,11 +17,13 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        final var profile = Optional.ofNullable(System.getenv().get(PROFILE_ENV))
-                .filter(Predicate.not(String::isEmpty))
-                .orElse(DEFAULT_PROFILE);
-
-        RequestManager.shared().setProfile(profile);
+//        final var profile = Optional.ofNullable(System.getenv().get(PROFILE_ENV))
+//                .filter(Predicate.not(String::isEmpty))
+//                .orElse(DEFAULT_PROFILE);
+//
+//        System.out.println("SetUp: " + profile);
+//
+//        RequestManager.shared().setProfile(profile);
 
         RestAssuredConfig config = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()

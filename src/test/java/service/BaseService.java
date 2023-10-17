@@ -16,11 +16,11 @@ public class BaseService {
     }
 
     public Response doPostRequest(String resource, Object body) {
-        return given()
+        return given().log().all()
                 .spec(RequestManager.shared().getRequest())
                 .contentType(ContentType.JSON)
                 .body(body)
-                .when()
+                .when().log().body()
                 .post(resource);
     }
 

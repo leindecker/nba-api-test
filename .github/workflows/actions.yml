@@ -1,13 +1,13 @@
 name: GitHub Actions for API Testing gorest.co.in/public/v2
 on:
   push:
-    branches: [ main ]
+    branches: [ main, task/propertie-file ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
     inputs:
       name:
-        description: "Run Manually"
+        description: "Github Actions for NBA-Api-Test"
 
 jobs:
   build_and_test:
@@ -21,16 +21,25 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache the Maven packages to speed up build
-        uses: actions/cache@v2
+#      - uses: cschleiden/replace-tokens@v1
+#        with:
+#         files: '["**/*.properties"]'
+#        env:
+#          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+
+      - name: Replace Secret Properties from application.properties
+        uses: christian-draeger/write-properties@1.0.1
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      #
-      #      - name: Clean and Install with Maven
-      #        run: mvn clean install
-      #        continue-on-error: true
+          path: './src/test/resources/config/application.properties'
+          property: authentication.bearer.token
+          value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+
+#      - name: Show updated file
+#        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
+#        shell: bash
+
+#      - name: Dump secret
+#        run: echo -n "${{ secrets.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
 
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"

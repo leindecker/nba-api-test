@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class PropertiesUtil {
 
-    public static final String LOCAL_PROPERTY_FILE_NAME = "application-local.properties";
-
     public static final String DEFAULT_PROPERTY_FILE_NAME = "application.properties";
 
     BufferedReader reader;
@@ -29,11 +27,17 @@ public class PropertiesUtil {
         }
     }
 
-    public String getFileName() {
-        if (RequestManager.shared().getProfile().equals("LOCAL")) {
-            return LOCAL_PROPERTY_FILE_NAME;
+    public String getPropertyByNameBase64(String property) {
+        String propertyName = properties.getProperty(property);
+
+        if (propertyName != null) {
+            return new EncodeUtil().getBase64TextDecoder(propertyName);
         } else {
-            return DEFAULT_PROPERTY_FILE_NAME;
+            throw new RuntimeException("Não foi encontrado a propriedade '" + property + "' no arquivo:" + property);
         }
+    }
+
+    public String getFileName() {
+        return DEFAULT_PROPERTY_FILE_NAME;
     }
 }
