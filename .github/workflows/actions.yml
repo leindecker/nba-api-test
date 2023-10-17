@@ -31,7 +31,7 @@ jobs:
         uses: christian-draeger/write-properties@1.0.1
         with:
           path: './src/test/resources/config/application-local.properties'
-          property: 'authentication.bearer.token'
+          property: authentication.bearer.token
           value: 'some value'
 
       - name: Show updated file
