@@ -15,7 +15,6 @@ public class PropertiesUtil {
     public PropertiesUtil() throws IOException {
         reader = new BufferedReader(new FileReader(ProjectSettings.PROPERTIES_PATH + getFileName()));
         properties.load(reader);
-        System.out.println("properties: " + properties);
     }
 
     public String getPropertyByName(String property) {
@@ -29,10 +28,7 @@ public class PropertiesUtil {
     }
 
     public String getPropertyByNameBase64(String property) {
-        System.out.println("String propert: " + property);
         String propertyName = properties.getProperty(property);
-
-        System.out.println("propertyName: " + propertyName);
 
         if (propertyName != null) {
             return new EncodeUtil().getBase64TextDecoder(propertyName);
