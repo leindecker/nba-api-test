@@ -21,11 +21,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - uses: cschleiden/replace-tokens@v1
+#      - uses: cschleiden/replace-tokens@v1
+#        with:
+#         files: '["**/*.properties"]'
+#        env:
+#          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+
+      - name: Write value to Properties-file
+        uses: christian-draeger/write-properties@1.0.1
         with:
-         files: '["**/*.properties"]'
-        env:
-          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+          path: './src/test/resources/config/application-local.properties'
+          property: 'authentication.bearer.token'
+          value: 'some value'
 
       - name: Show updated file
         run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
