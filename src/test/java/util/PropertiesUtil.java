@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class PropertiesUtil {
 
-    public static final String LOCAL_PROPERTY_FILE_NAME = "application-local.properties";
-
     public static final String DEFAULT_PROPERTY_FILE_NAME = "application.properties";
 
     BufferedReader reader;
@@ -44,6 +42,6 @@ public class PropertiesUtil {
     }
 
     public String getFileName() {
-        return LOCAL_PROPERTY_FILE_NAME;
+        return DEFAULT_PROPERTY_FILE_NAME;
     }
 }
