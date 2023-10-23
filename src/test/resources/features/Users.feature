@@ -1,4 +1,5 @@
-@usersresource
+@gorest
+@usersResource
 Feature:  Validate users resources
   Background:
     Given  I have logged into the api
@@ -6,7 +7,7 @@ Feature:  Validate users resources
   @createUser
   Scenario: Create User
     When I create a new user
-    Then I validate the return of the data according to the contract "responseCreateUserContract.json"
+    Then I validate the return of the data according to the contract "/users/responseCreateUserContract.json"
     And I check the status code 201
 
   @createUser
@@ -47,14 +48,14 @@ Feature:  Validate users resources
   @getUser @getUsers
   Scenario: Get all users
     When I search for all the users
-    Then I validate the return of the data according to the contract "usersContract.json"
+    Then I validate the return of the data according to the contract "/users/usersContract.json"
     And I check the status code 200
 
   @getUser
   Scenario: Get Specific User
     When I create a new user
     And  I search for the user created
-    Then I validate the return of the data according to the contract "responseSpecificUserContract.json"
+    Then I validate the return of the data according to the contract "/users/responseSpecificUserContract.json"
     And I check the status code 200
 
   @getUser @getInvalidUser
