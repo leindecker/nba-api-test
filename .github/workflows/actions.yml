@@ -27,8 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./
+      - uses: dbelyaev/action-checkstyle@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          checkstyle_config: ./src/test/resources/config/style/googlet_checks.xml
+          reporter: github-pr-review
+          checkstyle_config: ./src/test/resources/config/style/google_checks.xml
 
