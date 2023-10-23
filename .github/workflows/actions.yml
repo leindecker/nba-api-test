@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
 
   test-properties-file:
-    if: github.event_name == 'pull_request'
+#    if: github.event_name == 'pull_request'
     name: runner / checkstyle (properties_file)
     runs-on: ubuntu-latest
     steps:
