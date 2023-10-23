@@ -16,11 +16,11 @@ public class BaseService {
     }
 
     public Response doPostRequest(String resource, Object body) {
-        return given().log().all()
+        return given()
                 .spec(RequestManager.shared().getRequest())
                 .contentType(ContentType.JSON)
                 .body(body)
-                .when().log().body()
+                .when()
                 .post(resource);
     }
 
@@ -38,5 +38,12 @@ public class BaseService {
                 .body(body)
                 .when()
                 .patch(resource);
+    }
+
+    public Response doDeleteRequest(String resource) {
+        return given()
+                .spec(RequestManager.shared().getRequest())
+                .when()
+                .delete(resource);
     }
 }

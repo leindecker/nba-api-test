@@ -30,7 +30,6 @@ public class UsersSteps {
     public void iCreateANewUser() {
         Users validUser = UsersDataFactory.createValidUser();
         RequestManager.shared().setResponse(usersService.createUsers(validUser));
-        System.out.println("BDY: " + RequestManager.shared().getResponse().getBody().asString());
     }
 
     @Then("I validate the return of the data according to the contract {string}")
