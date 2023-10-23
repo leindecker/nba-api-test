@@ -26,10 +26,20 @@ jobs:
     name: runner / checkstyle (properties_file)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: dbelyaev/action-checkstyle@master
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          checkstyle_config: ./src/test/resources/config/style/google_checks.xml
+          java-version: 1.8
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build with Maven
+        run: mvn -B verify checkstyle:checkstyle
+      - uses: jwgmeligmeyling/checkstyle-github-action@master
+        with:
+          path: './src/test/resources/config/style/checkstyle-result.xml'
 
