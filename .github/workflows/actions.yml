@@ -21,6 +21,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
       - name: Exec tests with Maven
         run: mvn checkstyle:check
         continue-on-error: false
