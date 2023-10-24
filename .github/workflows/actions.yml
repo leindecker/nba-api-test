@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [config_env]
     steps:
+      - uses: actions/cache@v1
       - name: Replace Secret Properties from application.properties
         uses: christian-draeger/write-properties@1.0.1
         with:
