@@ -49,17 +49,17 @@ jobs:
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
 
-      - name: Checkout Branch
-        uses: actions/checkout@v2
+#      - name: Checkout Branch
+#        uses: actions/checkout@v2
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: target/allure-results
+          path: ./target/allure-results
 
-      - name: Checkout Branch
-        uses: actions/checkout@v2
+#      - name: Checkout Branch
+#        uses: actions/checkout@v2
 
       - name: download Artifact
         uses: actions/download-artifact@v2
