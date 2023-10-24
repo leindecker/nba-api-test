@@ -22,6 +22,7 @@ public class UsersBuilder {
 
     public UsersBuilder gender(String gender) {
         this.gender = gender;
+
         return this;
     }
 

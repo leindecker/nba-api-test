@@ -29,13 +29,13 @@ public class PostsSteps {
 
     @Then("I search all posts by user")
     public void iSearchAllPostsByUser() {
-        userId = RequestManager.shared().getResponse().jsonPath().getInt(JSON_PATH_ID);
+        userId = RequestManager.shared().getResponse().jsonPath().getInt("id");
         RequestManager.shared().setResponse(postsService.getPostsByUser(userId));
     }
 
     @Then("I delete the post")
     public void iDeleteThePost() {
-        postId = RequestManager.shared().getResponse().jsonPath().getInt(JSON_PATH_ID);
+        postId = RequestManager.shared().getResponse().jsonPath().getInt("id");
         RequestManager.shared().setResponse(postsService.deletePost(postId));
     }
 
