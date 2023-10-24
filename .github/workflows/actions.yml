@@ -49,11 +49,6 @@ jobs:
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
 
-      - name: download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
