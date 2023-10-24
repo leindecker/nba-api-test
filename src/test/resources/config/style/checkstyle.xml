@@ -74,10 +74,6 @@
         <module name="FallThrough"/>
         <module name="FinalClass"/>
         <module name="GenericWhitespace"/>
-        <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true"/>
-            <property name="ignoreSetter" value="true"/>
-        </module>
         <module name="IllegalCatch"/>
         <module name="IllegalThrows"/>
         <module name="IllegalToken"/>

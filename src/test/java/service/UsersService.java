@@ -6,11 +6,10 @@ import util.PropertiesUtil;
 
 import java.io.IOException;
 
-public class UsersService extends BaseService{
+public class UsersService extends BaseService {
 
     private static final String BASE_URI = "baseURI";
-
-    private static final String USERS_RESOURCE = "/users";
+    private static final String USERS_RESOURCE = "/users/";
 
     public UsersService() throws IOException {
         propertiesUtil = new PropertiesUtil();
@@ -26,10 +25,10 @@ public class UsersService extends BaseService{
     }
 
     public Response getUser(Long id) {
-        return doGetRequest(USERS_RESOURCE + "/" + id);
+        return doGetRequest(USERS_RESOURCE + id);
     }
 
     public Response updateUserDetails(Long id, Users users) {
-        return doPatchRequest(USERS_RESOURCE + "/" + id, users);
+        return doPatchRequest(USERS_RESOURCE + id, users);
     }
 }

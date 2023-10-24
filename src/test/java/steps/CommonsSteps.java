@@ -21,7 +21,8 @@ public class CommonsSteps {
 
     @Given("I have logged into the api")
     public void iHaveLoggedIntoTheApi() {
-        RequestManager.shared().setHeaders(Map.of("Authorization", "Bearer " + propertiesUtil.getPropertyByNameBase64(AUTH_BEARER_TOKEN)));
+        RequestManager.shared().setHeaders(Map.of("Authorization", "Bearer " + propertiesUtil
+                .getPropertyByNameBase64(AUTH_BEARER_TOKEN)));
     }
 
     @Then("I check the status code {int}")

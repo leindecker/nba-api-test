@@ -31,10 +31,6 @@ jobs:
     needs: [config_env]
     steps:
       - uses: actions/checkout@v2
-#      - uses: actions/setup-java@v2
-#        with:
-#          java-version: '17'
-#          distribution: 'temurin'
       - run: mvn checkstyle:check
         continue-on-error: false
 

@@ -7,28 +7,18 @@ import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import util.RequestManager;
 
-import java.util.Optional;
-import java.util.function.Predicate;
-
 public class Hooks {
 
-    private static final String PROFILE_ENV = "profile";
-    private static final String DEFAULT_PROFILE = "local";
+    private static final Integer PARAM_VALUE_CONN_TIMEOUT = 60000;
+
+    private static final Integer PARAM_VALUE_SOCKET_TIMEOUT = 240000;
 
     @Before
     public void setUp() {
-//        final var profile = Optional.ofNullable(System.getenv().get(PROFILE_ENV))
-//                .filter(Predicate.not(String::isEmpty))
-//                .orElse(DEFAULT_PROFILE);
-//
-//        System.out.println("SetUp: " + profile);
-//
-//        RequestManager.shared().setProfile(profile);
-
         RestAssuredConfig config = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
-                        .setParam("http.connection.timeout", 60000)
-                        .setParam("http.socket.timeout", 240000));
+                        .setParam("http.connection.timeout", PARAM_VALUE_CONN_TIMEOUT)
+                        .setParam("http.socket.timeout", PARAM_VALUE_SOCKET_TIMEOUT));
         RestAssured.config = config;
     }
 

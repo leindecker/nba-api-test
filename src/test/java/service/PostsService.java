@@ -1,14 +1,12 @@
 package service;
 
-import io.cucumber.java.sl.In;
 import io.restassured.response.Response;
-import lombok.extern.java.Log;
 import model.Posts;
 import util.PropertiesUtil;
 
 import java.io.IOException;
 
-public class PostsService extends BaseService{
+public class PostsService extends BaseService {
 
     private static final String BASE_URI = "baseURI";
 
