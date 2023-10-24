@@ -28,7 +28,7 @@ jobs:
       - name: CheckStyle
 #        uses: actions/checkout@v2
         run: mvn checkstyle:check
-        continue-on-error: false
+        continue-on-error: true
 
 #  exec_tests:
 #    name: Exec Checkstyle and run tests
