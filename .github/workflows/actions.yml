@@ -32,6 +32,7 @@ jobs:
     steps:
       - name: Checkstyle
         uses: actions/checkout@v2
+
         run: mvn checkstyle:check
         continue-on-error: true
 
