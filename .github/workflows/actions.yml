@@ -25,6 +25,10 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: CheckStyle Code
+        run: mvn checkstyle:check
+        continue-on-error: true
+
       - name: Replace Secret Properties from application.properties
         uses: christian-draeger/write-properties@1.0.1
         with:
@@ -32,15 +36,11 @@ jobs:
           property: authentication.bearer.token
           value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
 
-      - name: CheckStyle Code
-        run: mvn checkstyle:check
-        continue-on-error: true
-
       - name: Exec tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
 
-      - name: Generate Allure Report
+      - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
         continue-on-error: true
@@ -65,4 +65,3 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
-
