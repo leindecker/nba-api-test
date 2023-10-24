@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [config_env]
     steps:
+      - uses: actions/checkout@v2
       - run: mvn checkstyle:check
         continue-on-error: false
 
