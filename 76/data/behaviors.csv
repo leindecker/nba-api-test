@@ -1,5 +1,0 @@
-"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
-"","Validate users resources","Create User with empty Gender","0","0","1","0","0"
-"","Validate users resources","Create User with empty Name","0","0","1","0","0"
-"","Validate users resources","Create User with empty Email","0","0","1","0","0"
-"","Validate users resources","Create User with empty Status","0","0","1","0","0"
