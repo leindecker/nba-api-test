@@ -13,11 +13,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17
+      - name: Setup Java Environment
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
+          cache: maven
 
   run_tests:
     name: Run CheckStyle and Execute Tests
