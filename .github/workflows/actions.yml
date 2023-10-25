@@ -23,6 +23,9 @@ jobs:
       - name: MVN Version
         run: mvn -version
 
+      - name: MVN Compile
+        run: mvn compile
+
   run_tests:
     name: Run CheckStyle and Execute Tests
     runs-on: ubuntu-latest
