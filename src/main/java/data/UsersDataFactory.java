@@ -7,18 +7,22 @@ import org.apache.maven.surefire.shared.lang3.StringUtils;
 
 public class UsersDataFactory {
 
-    private static final Faker faker = new Faker();
+    private static final int SEVEN_THOUSAND_NUMBER = 7000;
+
+    private static final int EIGHT_THOUSAND_FIVE_HUNDRED_NUMBER = 8500;
+
+    private static final Faker FAKER = new Faker();
 
     public static Users createValidUser() {
         return newUser();
     }
 
     private static Users newUser() {
-        return new UsersBuilder().
-                name(faker.name().firstName()).
-                email(faker.internet().emailAddress()).
-                gender("male").
-                status("active").build();
+        return new UsersBuilder()
+                .name(FAKER.name().firstName())
+                .email(FAKER.internet().emailAddress())
+                .gender("male")
+                .status("active").build();
     }
 
     public static Users createUserWithEmptyName() {
@@ -50,7 +54,6 @@ public class UsersDataFactory {
     }
 
     public static Long invalidId() {
-        return (long) faker.number().numberBetween(7000, 8499);
+        return (long) FAKER.number().numberBetween(SEVEN_THOUSAND_NUMBER, EIGHT_THOUSAND_FIVE_HUNDRED_NUMBER);
     }
-
 }

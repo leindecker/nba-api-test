@@ -8,11 +8,13 @@ public class PostsBuilder {
 
     public PostsBuilder title(String title) {
         this.title = title;
+
         return this;
     }
 
     public PostsBuilder body(String body) {
         this.body = body;
+
         return this;
     }
 

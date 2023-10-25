@@ -16,6 +16,7 @@ import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 public class UsersSteps {
 
+    private static final String JSON_PATH_ID = "id";
     private Long id;
 
     private Users updatedUser;
@@ -34,7 +35,9 @@ public class UsersSteps {
 
     @Then("I validate the return of the data according to the contract {string}")
     public void iValidateTheReturnOfTheDataAccordingToTheContract(String schemaPath) {
-        RequestManager.shared().getResponse().then().body(matchesJsonSchemaInClasspath(ProjectSettings.API_CONTRACT_PATH + schemaPath));
+        RequestManager.shared().getResponse().then()
+                .body(matchesJsonSchemaInClasspath(ProjectSettings.API_CONTRACT_PATH
+                        + schemaPath));
     }
 
     @When("I create a new user with email already taken")
@@ -79,7 +82,7 @@ public class UsersSteps {
 
     @When("I search for the user created")
     public void iSearchForTheUserCreated() {
-        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong("id");
+        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong(JSON_PATH_ID);
         RequestManager.shared().setResponse(usersService.getUser(id));
     }
 
@@ -91,7 +94,7 @@ public class UsersSteps {
 
     @When("I update user details")
     public void iUpdateUserDetails() {
-        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong("id");
+        id = RequestManager.shared().getResponse().getBody().jsonPath().getLong(JSON_PATH_ID);
         updatedUser = UsersDataFactory.createValidUser();
         updatedUser.setId(id);
         RequestManager.shared().setResponse(usersService.updateUserDetails(id, updatedUser));
@@ -103,5 +106,4 @@ public class UsersSteps {
         Users responseBody = RequestManager.shared().getResponse().getBody().as(Users.class);
         assertThat(updatedUser, samePropertyValuesAs(responseBody));
     }
-
 }

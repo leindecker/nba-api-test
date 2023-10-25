@@ -63,15 +63,4 @@ public class RequestManager {
     public String getProfile() {
         return profile;
     }
-
-    public void setProfile(final String profile) {
-        if (profile == null || !profile.trim().equalsIgnoreCase("local")) {
-            this.profile = "default";
-        } else {
-            this.profile = profile.trim().toUpperCase();
-        }
-
-        System.out.println("PROFILE: " + profile);
-    }
-
 }

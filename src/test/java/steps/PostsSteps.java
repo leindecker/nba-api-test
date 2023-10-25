@@ -8,12 +8,11 @@ import service.PostsService;
 import util.RequestManager;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PostsSteps {
 
+    private static final String JSON_PATH_ID = "id";
     private Integer userId;
-
     private Integer postId;
     private final PostsService postsService;
 
@@ -23,7 +22,7 @@ public class PostsSteps {
 
     @When("I create a new post")
     public void iCreateANewPost() {
-        userId = RequestManager.shared().getResponse().jsonPath().getInt("id");
+        userId = RequestManager.shared().getResponse().jsonPath().getInt(JSON_PATH_ID);
         Posts validPost = PostsDataFactory.createValidPost();
         RequestManager.shared().setResponse(postsService.createPost(validPost, userId));
     }
@@ -39,5 +38,4 @@ public class PostsSteps {
         postId = RequestManager.shared().getResponse().jsonPath().getInt("id");
         RequestManager.shared().setResponse(postsService.deletePost(postId));
     }
-
 }

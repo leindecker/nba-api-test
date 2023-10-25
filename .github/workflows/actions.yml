@@ -1,72 +1,71 @@
 name: GitHub Actions for API Testing gorest.co.in/public/v2
 on:
   push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "Github Actions for NBA-Api-Test"
 
 jobs:
-  build_and_test:
+  config_env:
+    name: Config Env and Checkout Code
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    - name: Check out repository code
+      uses: actions/checkout@v2
 
-#      - uses: cschleiden/replace-tokens@v1
-#        with:
-#         files: '["**/*.properties"]'
-#        env:
-#          AUTHENTICATION_BEARER_TOKEN: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+    - name: Setup Java Environment
+      uses: actions/setup-java@v2
+      with:
+        distribution: temurin
+        java-version: 17
+        cache: maven
 
-      - name: Replace Secret Properties from application.properties
-        uses: christian-draeger/write-properties@1.0.1
-        with:
-          path: './src/test/resources/config/application.properties'
-          property: authentication.bearer.token
-          value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+    - name: Check out repository code
+      uses: actions/checkout@v2
 
-#      - name: Show updated file
-#        run: cat ${{github.workspace}}/src/test/resources/config/application-local.properties
-#        shell: bash
+    - name: Cache the Maven packages to speed up build
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
 
-#      - name: Dump secret
-#        run: echo -n "${{ secrets.AUTHENTICATION_BEARER_TOKEN }}" | xxd -ps
+    - name: Run CheckStyle Code
+      run: mvn checkstyle:check
+      continue-on-error: true
 
-      - name: Exec tests with Maven
-        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
-        continue-on-error: true
+    - name: Replace Secret Properties from application.properties
+      uses: christian-draeger/write-properties@1.0.1
+      with:
+        path: './src/test/resources/config/application.properties'
+        property: authentication.bearer.token
+        value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
 
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+    - name: Execute tests with Maven
+      run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
+      continue-on-error: true
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: target/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
+    - name: Get Allure history
+      uses: actions/checkout@v2
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+    - name: Allure Report action from marketplace
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
+      with:
+        allure_results: target/allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
