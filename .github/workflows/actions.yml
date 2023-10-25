@@ -45,6 +45,9 @@ jobs:
           property: authentication.bearer.token
           value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
 
+      - name: Check Java Version
+        uses: javac --version
+
       - name: Execute tests with Maven
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
