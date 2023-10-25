@@ -1,5 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Oct 17 19:47:16 GMT 2023","Tue Oct 17 19:47:18 GMT 2023","2094","","Validate users resources","","Create User with empty Gender","","Create User with empty Gender",""
-"passed","Tue Oct 17 19:47:18 GMT 2023","Tue Oct 17 19:47:19 GMT 2023","916","","Validate users resources","","Create User with empty Status","","Create User with empty Status",""
-"passed","Tue Oct 17 19:47:12 GMT 2023","Tue Oct 17 19:47:15 GMT 2023","3222","","Validate users resources","","Create User with empty Name","","Create User with empty Name",""
-"passed","Tue Oct 17 19:47:15 GMT 2023","Tue Oct 17 19:47:16 GMT 2023","843","","Validate users resources","","Create User with empty Email","","Create User with empty Email",""
