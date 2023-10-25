@@ -1,7 +1,6 @@
 name: GitHub Actions for API Testing gorest.co.in/public/v2
 on:
   push:
-    branches: [ main, task/checkstyle ]
   pull_request:
     branches: [ main ]
 

@@ -38,5 +38,4 @@ public class PostsSteps {
         postId = RequestManager.shared().getResponse().jsonPath().getInt("id");
         RequestManager.shared().setResponse(postsService.deletePost(postId));
     }
-
 }

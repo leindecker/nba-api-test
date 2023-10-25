@@ -11,12 +11,13 @@ public class UsersBuilder {
 
     public UsersBuilder id(Long id) {
         this.id = id;
-        return this;
 
+        return this;
     }
 
     public UsersBuilder name(String name) {
         this.name = name;
+
         return this;
     }
 
@@ -28,11 +29,13 @@ public class UsersBuilder {
 
     public UsersBuilder email(String email) {
         this.email = email;
+
         return this;
     }
 
     public UsersBuilder status(String status) {
         this.status = status;
+
         return this;
     }
 

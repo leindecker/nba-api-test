@@ -56,5 +56,4 @@ public class UsersDataFactory {
     public static Long invalidId() {
         return (long) FAKER.number().numberBetween(SEVEN_THOUSAND_NUMBER, EIGHT_THOUSAND_FIVE_HUNDRED_NUMBER);
     }
-
 }
