@@ -42,5 +42,4 @@ public class UsersBuilder {
     public Users build() {
         return new Users(id, name, email, gender, status);
     }
-
 }
