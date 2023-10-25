@@ -4,52 +4,64 @@ on:
     branches: [ main, task/checkstyle ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "Github Actions for NBA-Api-Test"
 
 jobs:
-  build_and_test:
+  config_env:
+    name: Config Env and Checkout Code
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
+    - name: Check out repository code
+      uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    - name: Setup Java Environment
+      uses: actions/setup-java@v2
+      with:
+        distribution: temurin
+        java-version: 17
+        cache: maven
 
-      - name: Replace Secret Properties from application.properties
-        uses: christian-draeger/write-properties@1.0.1
-        with:
-          path: './src/test/resources/config/application.properties'
-          property: authentication.bearer.token
-          value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+    - name: Check out repository code
+      uses: actions/checkout@v2
 
-      - name: Exec tests with Maven
-        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
-        continue-on-error: true
+    - name: Cache the Maven packages to speed up build
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
 
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+    - name: Run CheckStyle Code
+      run: mvn checkstyle:check
+      continue-on-error: true
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: target/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
+    - name: Replace Secret Properties from application.properties
+      uses: christian-draeger/write-properties@1.0.1
+      with:
+        path: './src/test/resources/config/application.properties'
+        property: authentication.bearer.token
+        value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+
+    - name: Execute tests with Maven
+      run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
+      continue-on-error: true
+
+    - name: Get Allure history
+      uses: actions/checkout@v2
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Allure Report action from marketplace
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
+      with:
+        allure_results: target/allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
 
       - name: Deploy report to Github Pages
         if: always()
