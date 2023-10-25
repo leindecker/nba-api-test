@@ -20,15 +20,13 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Run Maven Command
-        run: mvn clean install
-#  run_tests:
-#    name: Run CheckStyle and Execute Tests
-#    runs-on: ubuntu-latest
-#    needs: [config_env]
-#    steps:
-#      - name: Checkout Target Branch
-#        uses: actions/checkout@v2
+  run_tests:
+    name: Run CheckStyle and Execute Tests
+    runs-on: ubuntu-latest
+    needs: [config_env]
+    steps:
+      - name: Checkout Target Branch
+        uses: actions/checkout@v2
 #
 #      - name: Cache the Maven packages to speed up build
 #        uses: actions/cache@v1
@@ -41,16 +39,16 @@ jobs:
 #        run: mvn checkstyle:check
 #        continue-on-error: true
 #
-#      - name: Replace Secret Properties from application.properties
-#        uses: christian-draeger/write-properties@1.0.1
-#        with:
-#          path: './src/test/resources/config/application.properties'
-#          property: authentication.bearer.token
-#          value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
-#
-#      - name: Execute tests with Maven
-#        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
-#        continue-on-error: true
+      - name: Replace Secret Properties from application.properties
+        uses: christian-draeger/write-properties@1.0.1
+        with:
+          path: './src/test/resources/config/application.properties'
+          property: authentication.bearer.token
+          value: ${{ secrets.AUTHENTICATION_BEARER_TOKEN }}
+
+      - name: Execute tests with Maven
+        run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
+        continue-on-error: true
 #
 #      - name: Get Allure history
 #        uses: actions/checkout@v2
