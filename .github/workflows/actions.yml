@@ -10,9 +10,6 @@ jobs:
     name: Config Env and Checkout Code
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
       - name: Setup Java Environment
         uses: actions/setup-java@v2
         with:
@@ -20,13 +17,14 @@ jobs:
           java-version: 17
           cache: maven
 
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
   run_tests:
     name: Run CheckStyle and Execute Tests
     runs-on: ubuntu-latest
     needs: [config_env]
     steps:
-      - name: Checkout Target Branch
-        uses: actions/checkout@v2
 #
 #      - name: Cache the Maven packages to speed up build
 #        uses: actions/cache@v1
