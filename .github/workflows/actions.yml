@@ -49,9 +49,6 @@ jobs:
         run: mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
         continue-on-error: true
 
-#      - name: Checkout Branch
-#        uses: actions/checkout@v2
-
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
