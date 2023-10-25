@@ -20,6 +20,9 @@ jobs:
           java-version: 17
           cache: maven
 
+      - name: MVN Version
+        run: mvn -version
+
   run_tests:
     name: Run CheckStyle and Execute Tests
     runs-on: ubuntu-latest
