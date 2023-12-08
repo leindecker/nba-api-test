@@ -1,48 +1,46 @@
+# restAssured API Test Framework
 
-# APi Test for gorest public API
+API Testing Framework using `restAssured` with `GitHub Actions` workflow for generating and publishing test report
 
+## 🚀 Description:
 
+Automated CRUD (i.e., `POST`, `GET`, `PUT`, `DELETE`) operations using `restAssured`
 
+## 🚀 Prerequisites:
 
-## Authors
+- [JAVA](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [MAVEN](https://maven.apache.org/)
+- [restAssured](https://rest-assured.io/)
+- [Go Rest APIs](https://gorest.co.in)
 
-- [@Guilherme Leindecker](https://github.com/leindeckere)
+## 🚀 Installation Steps:
 
+- [Fork](https://github.com/leindecker/nba-api-test/fork) and Clone the repository `nba-api-test`
+- Move to the `nba-api-test` directory:
 
-## Run Locally
+## 🚀 Test Execution:
 
-Clone the project
+- To run the tests on your terminal:
 
-```bash
-  git clone https://github.com/leindecker/nba-api-test
+```commandline
+mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}
 ```
 
-Go to the project directory
+## 🚀 Reporting:
 
-```bash
-  cd my-project
-```
-
-Run tests with Maven
-
-```bash
-  mvn test -Dcucumber.filter.tags="${CUCUMBER_TAG}"
-```
-
-Every push to a new branch or Pull Request to branhc [origin/main] will trigger CI/CD Github Actions
+- Every push to a new branch or Pull Request to branhc [origin/main] will trigger CI/CD Github Actions
 
 Allure Reportare generate at the URL below:
 
 https://leindecker.github.io/nba-api-test/
 
-## Allure Reports - Locally
+- Allure Reports - Locally
 
-Run below command on command prompt or terminal with the following command
-```bash
-  allure serve
+```commandline
+ allure serve
 ```
 
-## Tech Stack
+## 🚀 Notes:
 
-**Project:** Java, Cucumber, restAssured, GitHub Actions
-
+- `.github/workflows/package_update.yml` workflow would ensure the dependencies are up-to-date
+- Tests are always run on the latest dependencies ✅
